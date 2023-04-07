@@ -1,0 +1,76 @@
+@startuml
+Enum FilamentType{
+PLA
+PETG
+ABS
+}
+
+abstract Class Printer{
+
+}
+
+Class StandardFDM{
+    private final int maxX;
+    private final int maxY;
+    private final int maxZ;
+    private Spool currentSpool;
+    private boolean isHoused;
+}
+Class PrinterManager{
+    private ArrayList<Printer> printers
+    private ArrayList<Print> prints
+    private ArrayList<Spool> spools
+    private ArrayList<Spool> freeSpools
+    private ArrayList<Printer> freePrinters
+    private ArrayList<PrintTask> pendingPrintTasks
+    private HashMap<Printer, PrintTask> runningPrintTasks
+
+'    +void addPrinter(int id, int printerType, String printerName, String manufacturer, int maxX, int maxY, int maxZ, int maxColors)
+'    + boolean containsSpool(final List<Spool> list, final String name)
+'    + void selectPrintTask(Printer printer)
+'    + void startInitialQueue()
+'    + void addPrint(String name, int height, int width, int length, ArrayList<Double> filamentLength, int printTime)
+'    + PrintTask getPrinterCurrentTask(Printer printer)
+'    + void addPrintTask(String printName, List<String> colors, FilamentType type)
+'    + Print findPrint(String printName)
+'    + Print findPrint(int index)
+'    + void registerPrinterFailure(int printerId)
+'    + void registerCompletion(int printerId)
+'    + void printError(String s)
+}
+Class PrintTask{
+    private Print print;
+    private List<String> colors;
+    private FilamentType filamentType;
+    + String toString()
+}
+
+Class Spool{
+    private final int id;
+    private final String color;
+    private final FilamentType filamentType;
+    private double length;
+    +boolean spoolMatch(String color, FilamentType type)
+    +boolean reduceLength(double byLength)
+}
+
+Class MultiColor{
+-int maxColors
+- Spool spool2
+- Spool spool3
+- Spool spool4
++ Spool[] getCurrentSpools()
++ String toString()
++ Int getMaxColors()
+}
+
+Printer<|--StandardFDM
+Spool--o PrinterManager
+Spool--o StandardFDM
+PrinterManager "0..*"*--Printer
+PrinterManager -- PrintTask
+StandardFDM<|--MultiColor
+
+
+
+@enduml
