@@ -35,6 +35,7 @@ public class Main {
             readPrintersFromFile("");
         }
         int choice = 1;
+        //todo switch case van maken
         while (choice > 0 && choice < 10) {
             menu();
             choice = menuChoice(9);
@@ -143,6 +144,7 @@ public class Main {
         System.out.println("<<---------- New Print Task ---------->");
         System.out.println("<---------- Available prints ----------");
         int counter = 1;
+        //todo var?
         for (var p : prints) {
             System.out.println("- " + counter + ": " + p.getName());
             counter++;

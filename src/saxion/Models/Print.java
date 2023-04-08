@@ -7,7 +7,7 @@ public class Print {
     private int height;
     private int width;
     private int length;
-    private ArrayList<Double> filamentLength; //todo waarom een arraylist?
+    private ArrayList<Double> filamentLength; //todo arraylist omdat een print uit meerdere kleuren kan bestaan
     private int printTime;
 
     public Print(String name, int height, int width, int length, ArrayList<Double> filamentLength, int printTime) {
